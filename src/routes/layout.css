@@ -6,20 +6,64 @@
   --font-sans: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-dark-bg: #030303;
-  --color-dark-card: #0a0a0c;
-  --color-dark-border: rgba(255, 255, 255, 0.08);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-card-bg: var(--card-bg);
+  --color-border-primary: var(--border-primary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-white: var(--text-white);
+
   --color-brand-cyan: #06b6d4;
   --color-brand-blue: #3b82f6;
   --color-brand-purple: #8b5cf6;
   --color-brand-emerald: #10b981;
 }
 
+:root {
+  --bg-primary: #030303;
+  --bg-secondary: #0a0a0c;
+  --card-bg: rgba(10, 10, 12, 0.7);
+  --border-primary: rgba(255, 255, 255, 0.08);
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-white: #ffffff;
+  --glass-glow: rgba(255, 255, 255, 0.03);
+  --nav-bg: rgba(10, 10, 12, 0.75);
+  --cyber-grid-color: rgba(255, 255, 255, 0.025);
+  --shadow-color: rgba(0, 0, 0, 0.6);
+  --btn-bg: rgba(255, 255, 255, 0.05);
+  --btn-hover: rgba(255, 255, 255, 0.1);
+  --nav-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+:root.light {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --border-primary: rgba(15, 23, 42, 0.08);
+  --text-primary: #334155;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-white: #0f172a;
+  --glass-glow: rgba(15, 23, 42, 0.01);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --cyber-grid-color: rgba(15, 23, 42, 0.015);
+  --shadow-color: rgba(15, 23, 42, 0.05);
+  --btn-bg: rgba(15, 23, 42, 0.04);
+  --btn-hover: rgba(15, 23, 42, 0.08);
+  --nav-shadow: 0 12px 30px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.03);
+  --card-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
 /* Global resets & scrollbar */
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-dark-bg);
-  color: #f3f4f6;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -27,7 +71,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-dark-bg);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -38,10 +83,10 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(3, 3, 3, 0.95);
+  background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--border-primary);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -57,8 +102,8 @@ body {
 .cyber-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, var(--cyber-grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--cyber-grid-color) 1px, transparent 1px);
 }
 
 .cyber-grid-radial {
@@ -73,10 +118,10 @@ body {
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(10, 10, 12, 0.7);
+  background: var(--card-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-primary);
 }
 
 /* Text glow */
@@ -93,4 +138,30 @@ body {
 /* Magnetic button alignment */
 .btn-magnetic {
   transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Floating animation for portrait */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Scroll reveal transitions */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }

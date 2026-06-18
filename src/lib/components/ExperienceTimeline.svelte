@@ -18,35 +18,38 @@
       company: 'PT. Jejaring Tiga Artha (Zi.Care)',
       role: 'Software Engineer',
       location: 'Jakarta, Indonesia',
-      date: '2023 - Present',
-      highlights: ['EMR Healthcare Tech', 'BPJS Eligibility API', 'LIS Device Sync'],
+      date: 'June 2023 - Present',
+      highlights: ['EMR Healthcare Tech', 'BPJS Integrations', 'LIS & RIS Interoperability'],
       outcomes: [
-        'Co-developed integrated clinical EMR APIs, implementing an automated eligibility bridge that decreased patient check-in queues by 45%.',
-        'Cooperated with lab specialists to sync clinical device reports directly onto doctor charts, reducing patient result wait times by 3 hours.'
+        'Developed and maintained a production Electronic Medical Record (EMR) system used by healthcare providers using Phalcon and Vue.js.',
+        'Designed and implemented new functionalities, troubleshot production issues, and improved system performance and stability.',
+        'Built and maintained integrations with external healthcare systems, including BPJS, Radiology Information Systems (RIS) and Laboratory Information Systems (LIS), to support healthcare interoperability.',
+        'Participated in Agile Scrum ceremonies and collaborated with cross-functional teams to ensure timely feature delivery.'
       ]
     },
     {
       id: 'ginara',
       company: 'PT. Ginara Solusi Teknologi Nusantara',
-      role: 'Lead Product Developer',
+      role: 'Self Employed Developer',
       location: 'Sukabumi, Indonesia',
-      date: '2024 - Present',
-      highlights: ['Omnichannel SaaS', 'Golang microservice', 'SvelteKit Web'],
+      date: 'October 2024 - Present',
+      highlights: ['Flutter Game Dev', 'Flame Engine', 'Client Web Platforms'],
       outcomes: [
-        'Architected ToKonek SaaS inventory worker in Go, syncing inventory levels across multiple marketplaces under 2 seconds, reducing stock discrepancies by 98%.',
-        'Built bulk order administrative tools and published Flutter mobile utility applications to the Google Play Store.'
+        'Developed and published mobile games using Flutter and Flame Engine for the Google Play Store.',
+        'Delivered responsive websites, including company profiles and interactive wedding invitation platforms, tailored to client requirements.'
       ]
     },
     {
       id: 'japi',
       company: 'Japi AI',
       role: 'Backend Developer (Freelance)',
-      location: 'Bekasi, Indonesia',
-      date: '2025 (3 Mos)',
-      highlights: ['NestJS Framework', 'AI Report Generator', 'WhatsApp Sync'],
+      location: 'Sukabumi, Indonesia',
+      date: 'August 2025 - October 2025',
+      highlights: ['NestJS Clean Arch', 'WhatsApp Integration', 'OpenAI API Sync'],
       outcomes: [
-        'Integrated OpenAI models to format study history into parent summaries, saving teachers up to 10 hours of manual reviews per cycle.',
-        'Structured automated WhatsApp notifications mapping attendance and grades, increasing parent engagement ratings by 35%.'
+        'Designed and developed RESTful APIs using NestJS following Clean Architecture principles to support scalable and maintainable applications.',
+        'Integrated WhatsApp (whatsapp-web.js) to automate student progress notifications and improve communication with parents.',
+        'Implemented OpenAI API integration to generate personalized progress summaries and actionable insights from student performance data.'
       ]
     },
     {
@@ -54,10 +57,13 @@
       company: 'PT. Mitra Sinerji Teknoindo',
       role: 'Web Developer',
       location: 'Bandung, Indonesia',
-      date: '2022 (5 Mos)',
-      highlights: ['NuxtJS SSR', 'GraphQL Schemas', 'Go REST Endpoints'],
+      date: 'July 2022 - November 2022',
+      highlights: ['TypeScript & Nuxt.js', 'GraphQL & Go APIs', 'PostgreSQL'],
       outcomes: [
-        'Coordinated with design teams to build administrative dashboards, designing GraphQL schemas that cut client-server data transfer by 40%.'
+        'Developed responsive and interactive web application interfaces using TypeScript, Nuxt.js, and Tailwind CSS.',
+        'Implemented GraphQL integrations to optimize data communication between frontend and backend services.',
+        'Worked closely with cross-functional teams to transform UI/UX designs and business requirements into production-ready features.',
+        'Designed and developed backend services using Golang and PostgreSQL, contributing to the delivery of end-to-end application functionality.'
       ]
     }
   ];
@@ -90,21 +96,21 @@
       <span class="w-2 h-2 rounded-full bg-brand-purple animate-pulse"></span>
       <span class="text-xs font-mono text-brand-purple uppercase tracking-widest font-semibold">Timeline</span>
     </div>
-    <h2 class="text-2xl md:text-3xl font-sans font-bold text-white tracking-tight">
+    <h2 class="text-2xl md:text-3xl font-sans font-bold text-text-white tracking-tight">
       Work History
     </h2>
-    <p class="text-neutral-400 font-mono text-xs max-w-xl mt-1 leading-relaxed">
+    <p class="text-text-secondary font-mono text-xs max-w-xl mt-1 leading-relaxed">
       A simple list of professional roles highlighting collaboration and direct product outcomes.
     </p>
   </div>
 
   <!-- Vertical Timeline -->
-  <div class="relative border-l border-white/10 pl-6 ml-3 space-y-8">
+  <div class="relative border-l border-border-primary pl-6 ml-3 space-y-8">
     {#each experiences as exp}
       <div class="timeline-item opacity-0 translate-y-4 transition-all duration-500 ease-out relative">
         
         <!-- Circle indicator -->
-        <span class="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-neutral-950 border border-brand-purple">
+        <span class="absolute -left-[31px] top-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-bg-primary border border-brand-purple">
           <span class="h-1 w-1 rounded-full bg-brand-purple animate-ping"></span>
         </span>
 
@@ -114,10 +120,10 @@
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1 mb-2">
             <div>
               <span class="text-brand-purple font-mono text-[10px] font-semibold uppercase tracking-wider block">{exp.date}</span>
-              <h3 class="text-base font-sans font-bold text-white leading-tight">{exp.role}</h3>
-              <p class="text-neutral-300 text-xs font-sans font-medium">{exp.company}</p>
+              <h3 class="text-base font-sans font-bold text-text-white leading-tight">{exp.role}</h3>
+              <p class="text-text-primary text-xs font-sans font-medium">{exp.company}</p>
             </div>
-            <span class="text-neutral-500 font-mono text-[10px]">{exp.location}</span>
+            <span class="text-text-muted font-mono text-[10px]">{exp.location}</span>
           </div>
 
           <!-- Tags -->
@@ -130,7 +136,7 @@
           </div>
 
           <!-- Outcomes Bullet List -->
-          <ul class="space-y-1.5 text-xs text-neutral-400 font-sans leading-relaxed">
+          <ul class="space-y-1.5 text-xs text-text-secondary font-sans leading-relaxed">
             {#each exp.outcomes as outcome}
               <li class="flex items-start gap-2">
                 <span class="text-brand-purple select-none">•</span>
@@ -145,27 +151,35 @@
 
     <!-- Education Entry (Combined & Small) -->
     <div class="timeline-item opacity-0 translate-y-4 transition-all duration-500 ease-out relative pt-4">
-      <span class="absolute -left-[31px] top-5.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-neutral-950 border border-neutral-700"></span>
-      <div class="glass-panel rounded-2xl p-5 border border-white/5 hover:border-neutral-700">
-        <h3 class="text-sm font-sans font-bold text-white mb-3">🎓 Education & Programs</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-sans">
+      <span class="absolute -left-[31px] top-5.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-bg-primary border border-border-primary"></span>
+      <div class="glass-panel rounded-2xl p-5 hover:border-brand-purple/20 transition-all duration-300">
+        <h3 class="text-sm font-sans font-bold text-text-white mb-3">🎓 Education & Programs</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs font-sans">
+          <div>
+            <span class="text-brand-cyan font-mono text-[10px] block">2026 - Present</span>
+            <span class="block text-text-white font-bold">Universitas Terbuka</span>
+            <span class="text-text-secondary block text-[11px]">Information System</span>
+            <span class="text-text-muted block text-[10px]">Bogor, Indonesia</span>
+          </div>
           <div>
             <span class="text-brand-cyan font-mono text-[10px] block">2022 - 2023</span>
-            <span class="block text-white font-bold">Hacktiv8 Jakarta</span>
-            <span class="text-neutral-400 block text-[11px]">Full Stack JS (Grade 95/100)</span>
+            <span class="block text-text-white font-bold">Hacktiv8 Jakarta</span>
+            <span class="text-text-secondary block text-[11px]">Full Stack JavaScript (95/100)</span>
+            <span class="text-text-muted block text-[10px] mb-1.5">Jakarta, Indonesia</span>
             
             <!-- Certificate Preview -->
-            <a href={hacktivCertificate} target="_blank" rel="noopener noreferrer" class="block mt-2.5 relative group overflow-hidden rounded-lg border border-white/10 w-full max-w-[150px] cursor-pointer">
+            <a href={hacktivCertificate} target="_blank" rel="noopener noreferrer" class="block relative group overflow-hidden rounded-lg border border-border-primary w-full max-w-[140px] cursor-pointer">
               <img src={hacktivCertificate} alt="Hacktiv8 Graduate Certificate" class="w-full h-auto transition-transform duration-300 group-hover:scale-105" />
               <div class="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all duration-300">
-                <span class="text-[9px] font-mono text-white bg-black/80 px-2 py-0.5 rounded">View Certificate ➔</span>
+                <span class="text-[9px] font-mono text-white bg-black/80 px-2 py-0.5 rounded text-center">View Certificate ➔</span>
               </div>
             </a>
           </div>
           <div>
             <span class="text-brand-cyan font-mono text-[10px] block">2019 - 2022</span>
-            <span class="block text-white font-bold">SMKN 2 Sukabumi</span>
-            <span class="text-neutral-400 block text-[11px]">Software Engineering Major</span>
+            <span class="block text-text-white font-bold">SMKN 2 Sukabumi</span>
+            <span class="text-text-secondary block text-[11px]">Software Engineering</span>
+            <span class="text-text-muted block text-[10px]">Sukabumi, Indonesia</span>
           </div>
         </div>
       </div>

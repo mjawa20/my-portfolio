@@ -2,11 +2,26 @@
   import { onMount, onDestroy } from 'svelte';
   import * as THREE from 'three';
 
+  interface Props {
+    isLight?: boolean;
+  }
+
+  let { isLight = false }: Props = $props();
+
   let container: HTMLDivElement;
   let renderer: THREE.WebGLRenderer;
   let scene: THREE.Scene;
   let camera: THREE.PerspectiveCamera;
   let animationId: number;
+
+  $effect(() => {
+    if (!renderer || !scene) return;
+    const bgColor = isLight ? 0xf8fafc : 0x030303;
+    renderer.setClearColor(bgColor, 1);
+    if (scene.fog && 'color' in scene.fog) {
+      scene.fog.color.setHex(bgColor);
+    }
+  });
 
   let mouseX = 0;
   let mouseY = 0;
@@ -32,7 +47,8 @@
 
     // 1. Scene setup
     scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x030303, 0.0015);
+    const initialBgColor = isLight ? 0xf8fafc : 0x030303;
+    scene.fog = new THREE.FogExp2(initialBgColor, 0.0015);
 
     // 2. Camera setup
     camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
@@ -42,7 +58,7 @@
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(width, height);
-    renderer.setClearColor(0x030303, 1);
+    renderer.setClearColor(initialBgColor, 1);
     container.appendChild(renderer.domElement);
 
     // 4. Initialize Particle Positions & Speeds
@@ -259,4 +275,4 @@
   });
 </script>
 
-<div bind:this={container} class="fixed inset-0 -z-20 overflow-hidden pointer-events-none bg-dark-bg"></div>
+<div bind:this={container} class="fixed inset-0 -z-20 overflow-hidden pointer-events-none"></div>
