@@ -166,7 +166,7 @@ CERTIFICATIONS
       ],
       link: 'https://play.google.com/store/apps/details?id=com.eamonstudio.word_rush',
       github: 'https://github.com/mjawa20/word-rush',
-      images: ['/project_wordrush_mockup.png']
+      images: ['/wordrush.png', '/wordrush5.jpg', '/wordrush2.jpg', '/wordrush3.jpg', '/wordrush4.jpg']
     },
     {
       id: 'emr',
@@ -183,7 +183,7 @@ CERTIFICATIONS
         'Enabled real-time diagnostic reporting by integrating laboratory and radiology information systems.'
       ],
       link: 'https://zicare.id/',
-      images: ['/project_emr_mockup.png']
+      images: ['/project_emr_mockup.png', '/project_emr_mockup_2.png']
     },
     {
       id: 'tokonek',
@@ -216,9 +216,8 @@ CERTIFICATIONS
         'Created responsive and interactive interfaces to optimize government administrative workflow.',
         'Leveraged GraphQL schemas to improve client-server communication and optimize network payloads.'
       ],
-      link: '#',
-      github: 'https://sertifikasi.postel.go.id/',
-      images: ['/project_esertifikasi_mockup.png']
+      link: 'https://sertifikasi.postel.go.id/',
+      images: ['/sertifikasi.png']
     }
   ];
 
@@ -229,19 +228,79 @@ CERTIFICATIONS
   let isSending = $state(false);
   let formSent = $state(false);
 
-  function handleContactSubmit(e: SubmitEvent) {
+  // Web3Forms Access Key - Dapatkan gratis di https://web3forms.com
+  // Masukkan key Anda di sini untuk mengirim email langsung di background.
+  // Jika dikosongkan, form akan otomatis menggunakan mailto (membuka aplikasi email).
+  let web3formsKey = $state('b7977135-1ead-4466-be82-b16c9136df5c');
+
+  async function handleContactSubmit(e: SubmitEvent) {
     e.preventDefault();
     if (!contactName || !contactEmail || !contactMessage) return;
 
     isSending = true;
-    setTimeout(() => {
+
+    if (web3formsKey) {
+      // Kirim via Web3Forms API (Background / Silent)
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: web3formsKey,
+            name: contactName,
+            email: contactEmail,
+            message: contactMessage,
+            subject: `Portfolio Message from ${contactName}`
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          formSent = true;
+          triggerToast('✔ Message sent successfully!');
+          contactName = '';
+          contactEmail = '';
+          contactMessage = '';
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
+      } catch (err) {
+        console.error(err);
+        triggerToast('❌ Error. Opening email client...');
+        triggerMailto();
+      } finally {
+        isSending = false;
+      }
+    } else {
+      // Fallback ke Mailto (Synchronous - langsung terbuka tanpa diblokir browser)
+      triggerMailto();
       isSending = false;
       formSent = true;
-      contactName = '';
-      contactEmail = '';
-      contactMessage = '';
-      triggerToast('✔ Message sent successfully!');
-    }, 1200);
+    }
+  }
+
+  function triggerMailto() {
+    const recipient = 'm.jawahiruzzaman@gmail.com';
+    const subject = encodeURIComponent(`Message from Portfolio - ${contactName}`);
+    const body = encodeURIComponent(`Hello,\n\nYou received a new message from your portfolio contact form:\n\nName: ${contactName}\nEmail: ${contactEmail}\n\nMessage:\n${contactMessage}\n\n---\nSent from Portfolio Website`);
+    
+    const mailtoUrl = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    const link = document.createElement('a');
+    link.href = mailtoUrl;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    triggerToast('📧 Opening email client...');
+    
+    contactName = '';
+    contactEmail = '';
+    contactMessage = '';
   }
 </script>
 
@@ -297,6 +356,47 @@ CERTIFICATIONS
           </div>
           <span class="text-text-white font-bold text-base font-sans">Muhammad Jawahiruzzaman</span>
           <span class="text-text-muted font-mono text-[10px] mt-0.5">Jakarta, Indonesia</span>
+          
+          <!-- Interactive Themed Brand Icon Row -->
+          <div class="flex items-center gap-2.5 mt-3.5">
+            <a 
+              href="https://github.com/mjawa20" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="w-8 h-8 rounded-lg border border-border-primary bg-bg-secondary hover:bg-btn-hover text-text-secondary hover:text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm group/btn hover:border-brand-purple/40 hover:shadow-[0_0_12px_rgba(139,92,246,0.15)]"
+              aria-label="GitHub Profile"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            
+            <a 
+              href="https://linkedin.com/in/amanwp/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="w-8 h-8 rounded-lg border border-border-primary bg-bg-secondary hover:bg-btn-hover text-text-secondary hover:text-brand-blue flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm group/btn hover:border-brand-blue/40 hover:shadow-[0_0_12px_rgba(59,130,246,0.15)]"
+              aria-label="LinkedIn Profile"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+
+            <a 
+              href="mailto:m.jawahiruzzaman@gmail.com" 
+              class="w-8 h-8 rounded-lg border border-border-primary bg-bg-secondary hover:bg-btn-hover text-text-secondary hover:text-brand-cyan flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm group/btn hover:border-brand-cyan/40 hover:shadow-[0_0_12px_rgba(6,182,212,0.15)]"
+              aria-label="Send Email"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+
+            <a 
+              href="https://wa.me/6285728888280" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="w-8 h-8 rounded-lg border border-border-primary bg-bg-secondary hover:bg-btn-hover text-text-secondary hover:text-brand-emerald flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm group/btn hover:border-brand-emerald/40 hover:shadow-[0_0_12px_rgba(16,185,129,0.15)]"
+              aria-label="Chat via WhatsApp"
+            >
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24"><path d="M12.004 2C6.48 2 2 6.48 2 12.004c0 1.762.46 3.478 1.334 5l-1.42 5.19 5.302-1.39A9.97 9.97 0 0 0 12.004 22c5.524 0 10.004-4.48 10.004-10.004C22.008 6.48 17.528 2 12.004 2zm6.262 14.188c-.26.733-1.49 1.403-2.072 1.488-.53.078-1.22.146-3.864-.897-3.38-1.332-5.56-4.777-5.73-5.003-.17-.226-1.378-1.833-1.378-3.497 0-1.664.87-2.48 1.18-2.812.31-.33.68-.415.9-.415.222 0 .445.002.637.012.2.01.467-.04.726.586.263.637.893 2.183.97 2.342.078.16.13.346.023.56-.106.213-.16.347-.32.532-.16.186-.337.416-.48.56-.16.16-.328.332-.14.654.187.323.834 1.372 1.783 2.222.95.85 1.75 1.112 2.074 1.274.323.16.51.135.7-.08.19-.214.814-.947 1.03-1.272.217-.324.433-.27.732-.16.3.11 1.902.898 2.228 1.06.326.164.542.245.62.38.077.135.077.785-.183 1.518z"/></svg>
+            </a>
+          </div>
         </div>
 
         <!-- Right: Bio copy & CTAs -->
@@ -427,26 +527,74 @@ CERTIFICATIONS
             Interested in scaling systems or have an open role on your developer team? Let's discuss directly.
           </p>
 
-          <div class="space-y-3 pt-3 border-t border-border-primary">
-            <a href="mailto:m.jawahiruzzaman@gmail.com" class="flex items-center gap-2.5 text-text-primary hover:text-brand-cyan transition-colors text-xs font-mono group cursor-pointer">
-              <span class="w-7 h-7 rounded-lg bg-bg-secondary border border-border-primary flex items-center justify-center font-bold text-text-secondary group-hover:text-brand-cyan">@</span>
-              <span>m.jawahiruzzaman@gmail.com</span>
-            </a>
+          <div class="flex flex-col gap-3 pt-3.5 border-t border-border-primary">
             
-            <a href="tel:+6285728888280" class="flex items-center gap-2.5 text-text-primary hover:text-brand-cyan transition-colors text-xs font-mono group cursor-pointer">
-              <span class="w-7 h-7 rounded-lg bg-bg-secondary border border-border-primary flex items-center justify-center font-bold text-text-secondary group-hover:text-brand-cyan">☏</span>
-              <span>+6285728888280</span>
+            <!-- Email Contact Pill -->
+            <a 
+              href="mailto:m.jawahiruzzaman@gmail.com" 
+              class="glass-panel p-3.5 rounded-2xl flex items-center gap-3.5 hover:border-brand-cyan/45 hover:shadow-[0_8px_30px_rgba(6,182,212,0.12)] hover:translate-x-1.5 transition-all duration-300 group cursor-pointer"
+              style:box-shadow="var(--card-shadow)"
+            >
+              <span class="w-9 h-9 rounded-xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan group-hover:scale-110 group-hover:bg-brand-cyan/20 transition-all duration-300 shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-mono text-brand-cyan font-bold tracking-wider uppercase leading-none mb-1">Email</span>
+                <span class="text-xs text-text-primary group-hover:text-brand-cyan transition-colors block font-mono break-all sm:break-normal">m.jawahiruzzaman@gmail.com</span>
+              </div>
             </a>
 
-            <!-- Social Links Row -->
-            <div class="flex gap-3 pt-1">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg border border-border-primary bg-bg-secondary font-mono text-[9px] text-text-secondary hover:text-text-white hover:border-border-primary transition-all cursor-pointer">
-                GITHUB
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg border border-border-primary bg-bg-secondary font-mono text-[9px] text-text-secondary hover:text-text-white hover:border-border-primary transition-all cursor-pointer">
-                LINKEDIN
-              </a>
-            </div>
+            <!-- Phone / WA Contact Pill -->
+            <a 
+              href="https://wa.me/6285728888280" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glass-panel p-3.5 rounded-2xl flex items-center gap-3.5 hover:border-brand-emerald/45 hover:shadow-[0_8px_30px_rgba(16,185,129,0.12)] hover:translate-x-1.5 transition-all duration-300 group cursor-pointer"
+              style:box-shadow="var(--card-shadow)"
+            >
+              <span class="w-9 h-9 rounded-xl bg-brand-emerald/10 border border-brand-emerald/20 flex items-center justify-center text-brand-emerald group-hover:scale-110 group-hover:bg-brand-emerald/20 transition-all duration-300 shrink-0">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.004 2C6.48 2 2 6.48 2 12.004c0 1.762.46 3.478 1.334 5l-1.42 5.19 5.302-1.39A9.97 9.97 0 0 0 12.004 22c5.524 0 10.004-4.48 10.004-10.004C22.008 6.48 17.528 2 12.004 2zm6.262 14.188c-.26.733-1.49 1.403-2.072 1.488-.53.078-1.22.146-3.864-.897-3.38-1.332-5.56-4.777-5.73-5.003-.17-.226-1.378-1.833-1.378-3.497 0-1.664.87-2.48 1.18-2.812.31-.33.68-.415.9-.415.222 0 .445.002.637.012.2.01.467-.04.726.586.263.637.893 2.183.97 2.342.078.16.13.346.023.56-.106.213-.16.347-.32.532-.16.186-.337.416-.48.56-.16.16-.328.332-.14.654.187.323.834 1.372 1.783 2.222.95.85 1.75 1.112 2.074 1.274.323.16.51.135.7-.08.19-.214.814-.947 1.03-1.272.217-.324.433-.27.732-.16.3.11 1.902.898 2.228 1.06.326.164.542.245.62.38.077.135.077.785-.183 1.518z"/></svg>
+              </span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-mono text-brand-emerald font-bold tracking-wider uppercase leading-none mb-1">WhatsApp</span>
+                <span class="text-xs text-text-primary group-hover:text-brand-emerald transition-colors block font-mono break-all sm:break-normal">+6285728888280</span>
+              </div>
+            </a>
+
+            <!-- GitHub Contact Pill -->
+            <a 
+              href="https://github.com/mjawa20" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="glass-panel p-3.5 rounded-2xl flex items-center gap-3.5 hover:border-brand-purple/45 hover:shadow-[0_8px_30px_rgba(139,92,246,0.12)] hover:translate-x-1.5 transition-all duration-300 group cursor-pointer"
+              style:box-shadow="var(--card-shadow)"
+            >
+              <span class="w-9 h-9 rounded-xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple group-hover:scale-110 group-hover:bg-brand-purple/20 transition-all duration-300 shrink-0">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-mono text-brand-purple font-bold tracking-wider uppercase leading-none mb-1">GitHub</span>
+                <span class="text-xs text-text-primary group-hover:text-brand-purple transition-colors block font-mono break-all sm:break-normal">github.com/mjawa20</span>
+              </div>
+            </a>
+
+            <!-- LinkedIn Contact Pill -->
+            <a 
+              href="https://linkedin.com/in/amanwp/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="glass-panel p-3.5 rounded-2xl flex items-center gap-3.5 hover:border-brand-blue/45 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)] hover:translate-x-1.5 transition-all duration-300 group cursor-pointer"
+              style:box-shadow="var(--card-shadow)"
+            >
+              <span class="w-9 h-9 rounded-xl bg-brand-blue/10 border border-brand-blue/20 flex items-center justify-center text-brand-blue group-hover:scale-110 group-hover:bg-brand-blue/20 transition-all duration-300 shrink-0">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </span>
+              <div class="flex flex-col min-w-0">
+                <span class="text-[9px] font-mono text-brand-blue font-bold tracking-wider uppercase leading-none mb-1">LinkedIn</span>
+                <span class="text-xs text-text-primary group-hover:text-brand-blue transition-colors block font-mono break-all sm:break-normal">linkedin.com/in/amanwp/</span>
+              </div>
+            </a>
+
           </div>
         </div>
 

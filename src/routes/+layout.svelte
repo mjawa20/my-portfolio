@@ -125,12 +125,11 @@
       <div class="flex items-center gap-2">
         <span>© {new Date().getFullYear()} Muhammad Jawahiruzzaman.</span>
         <span class="text-border-primary">|</span>
-        <span class="text-brand-cyan text-[10px]">DESIGNED_FOR_PRODUCTION</span>
       </div>
       
       <div class="flex gap-6">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-text-white transition-colors text-text-secondary">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-text-white transition-colors text-text-secondary">LinkedIn</a>
+        <a href="https://github.com/mjawa20" target="_blank" rel="noopener noreferrer" class="hover:text-text-white transition-colors text-text-secondary">GitHub</a>
+        <a href="https://linkedin.com/in/amanwp/" target="_blank" rel="noopener noreferrer" class="hover:text-text-white transition-colors text-text-secondary">LinkedIn</a>
         <a href="mailto:m.jawahiruzzaman@gmail.com" class="hover:text-text-white transition-colors text-text-secondary">Email</a>
       </div>
     </div>
