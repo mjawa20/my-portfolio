@@ -7,10 +7,10 @@
 
   // Hero interactive typing headlines
   const headlineTexts = [
-    'Designing software systems that solve business challenges.',
-    'Building applications that medical teams and merchants trust.',
-    'Integrating secure services to improve patient check-ins.',
-    'Collaborating with product teams to build fast SaaS platforms.'
+    'Building software that powers healthcare and business operations.',
+    'Engineering scalable applications with real-world impact.',
+    'Creating reliable digital solutions for complex industries.',
+    'Turning ideas into maintainable and production-ready systems.'
   ];
   let currentTextIndex = $state(0);
   let displayedText = $state('');
