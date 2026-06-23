@@ -262,14 +262,14 @@
       {#if project.images.length > 1}
         <button 
           onclick={prevImage} 
-          class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all cursor-pointer text-xl"
+          class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 text-white flex items-center justify-center hover:bg-white/40 transition-all cursor-pointer text-xl"
           aria-label="Previous screenshot"
         >
           &#x2190;
         </button>
         <button 
           onclick={nextImage} 
-          class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/10 border border-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-all cursor-pointer text-xl"
+          class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 text-white flex items-center justify-center hover:bg-white/40 transition-all cursor-pointer text-xl"
           aria-label="Next screenshot"
         >
           &#x2192;

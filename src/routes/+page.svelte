@@ -200,7 +200,7 @@ CERTIFICATIONS
         'Implemented robust file storage using MinIO and clean database handling with PostgreSQL and Gorm.'
       ],
       link: 'https://tokonek.id/',
-      images: ['/project_tokonek_mockup.png']
+      images: [ '/tokonek3.png', '/tokonek.png', '/tokonek2.png',  '/tokonek4.png',]
     },
     {
       id: 'esertifikasi',
