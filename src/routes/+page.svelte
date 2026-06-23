@@ -29,65 +29,16 @@
 
   function downloadCV() {
     triggerToast('🚀 Downloading CV_Muhammad_Jawahiruzzaman.pdf');
+
     const link = document.createElement('a');
-    link.href = '#';
-    link.download = 'CV_Muhammad_Jawahiruzzaman.pdf';
-    
-    const placeholderContent = `Muhammad Jawahiruzzaman - Software Engineer
+    link.href = '/cv.pdf';
+    link.download = 'cv.pdf';
 
-Jakarta, Indonesia | +6285728888280 | m.jawahiruzzaman@gmail.com | LinkedIn | GitHub
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
-SUMMARY
-Software Engineer with 3+ years of experience building production-grade applications across healthcare and business domains. Skilled in backend and full-stack development using PHP, Go, JavaScript, and TypeScript, with hands-on experience in Phalcon, Vue.js, SvelteKit, and NestJS. Experienced in integrating healthcare systems, including BPJS, Laboratory Information Systems (LIS), and Radiology Information Systems (RIS), to support interoperability and streamline operations. Proven ability to deliver reliable, maintainable, and user-focused solutions while collaborating effectively within Agile teams.
-
-EDUCATION
-- Universitas Terbuka Bogor, Indonesia: Information System (2026 - Present)
-- Hacktiv8 Jakarta, Indonesia: Full Stack JavaScript Immersive Program (2022 - 2023) - Grade 95/100
-- SMKN 2 Sukabumi Sukabumi, Indonesia: Software Engineering (2019 - 2022)
-
-WORK EXPERIENCE
-- PT. Jejaring Tiga Artha (Zi.Care) (June 2023 - Present) - Software Engineer
-  * Developed and maintained a production Electronic Medical Record (EMR) system using Phalcon and Vue.js.
-  * Designed and implemented new functionalities, troubleshot production issues, and improved performance and stability.
-  * Participated in Agile Scrum ceremonies and collaborated with cross-functional teams.
-  * Integrated external healthcare systems (BPJS, RIS, LIS) for healthcare interoperability.
-- PT. Ginara Solusi Teknologi Nusantara (October 2024 - Present) - Self Employed
-  * Developed and published mobile games using Flutter and Flame Engine for the Google Play Store.
-  * Delivered responsive websites, company profiles, and interactive wedding invitations.
-- Japi AI (August 2025 - October 2025) - Backend Freelance
-  * Designed and developed RESTful APIs using NestJS following Clean Architecture principles.
-  * Integrated WhatsApp (whatsapp-web.js) to automate student progress notifications.
-  * Implemented OpenAI API integration to generate personalized student performance summaries.
-- PT. Mitra Sinerji Teknoindo (July 2022 - November 2022) - Web Developer
-  * Developed responsive web interfaces using TypeScript, Nuxt.js, and Tailwind CSS.
-  * Implemented GraphQL integrations to optimize data communication.
-  * Worked closely with cross-functional teams to translate UI/UX designs into production features.
-  * Designed and developed backend services using Golang and PostgreSQL.
-
-SKILLS
-- Languages: PHP, JavaScript, TypeScript, Go, Dart
-- Front End: Vue.js, SvelteKit, Nuxt.js, React.js, Flutter, Tailwind CSS, Pinia, Redux, HTML, CSS
-- Back End: Phalcon, NestJS, Express.js, Gin, Laravel, REST API, GraphQL, RabbitMQ
-- Databases & Storage: PostgreSQL, MariaDB, MongoDB, Redis, MinIO
-- Tools & DevOps: Docker, Git, Firebase
-
-PROJECTS
-- WordRush: Charades Party Game (March 2026) - Flutter + Flame Engine, Firebase (Firestore)
-- Tokonek (June 2025) - TypeScript, SvelteJS, TailwindCSS, Go, PostgreSQL, MinIO, Gorm
-- E-Sertifikasi NextGen (October 2022) - VueJS, NuxtJS, TailwindCSS, Go, PostgreSQL, GraphQL, Gorm, TypeScript
-
-CERTIFICATIONS
-- HackerRank: JavaScript (Intermediate) - March 2023
-- HackerRank: Problem Solving (Intermediate) - March 2021`;
-    const blob = new Blob([placeholderContent], { type: 'text/plain' });
-    link.href = URL.createObjectURL(blob);
-    
-    setTimeout(() => {
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      triggerToast('✔ Download complete.');
-    }, 1000);
+    triggerToast('✔ Download complete.');
   }
 
   // Typewriter Loop & Intersection Observer for Scroll Reveal
