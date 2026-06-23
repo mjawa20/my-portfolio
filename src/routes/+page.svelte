@@ -412,7 +412,7 @@ CERTIFICATIONS
           </div>
 
           <p class="text-text-primary text-xs sm:text-sm leading-relaxed font-sans font-normal max-w-2xl mx-auto lg:mx-0">
-            Software Engineer with 3+ years of experience building production-grade applications across healthcare and business domains. Skilled in backend and full-stack development, mobile game creation with Flutter, and integrating complex healthcare and automation systems.
+            Software Engineer with 3+ years of experience building production-grade applications across healthcare and business domains. Skilled in PHP, Go, JavaScript, and TypeScript, with hands-on experience in Phalcon, Vue.js, SvelteKit, and NestJS. Experienced in developing scalable web applications, RESTful APIs, and integrating healthcare systems such as BPJS, Laboratory Information Systems (LIS), and Radiology Information Systems (RIS). Passionate about delivering reliable, maintainable, and user-focused solutions while collaborating effectively within Agile teams. 
           </p>
 
           <!-- Core CTAs -->
